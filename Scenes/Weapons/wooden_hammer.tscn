@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkm24qsnhcv4a"]
+
+[ext_resource type="PackedScene" uid="uid://81sfpnst5y6b" path="res://Scenes/Weapons/weapon.tscn" id="1_eq6xh"]
+[ext_resource type="Texture2D" uid="uid://co3uh7qv6po8s" path="res://Assets/items/weapons/weapon_wooden_hammer.png" id="2_rqbwq"]
+[ext_resource type="Script" path="res://Scenes/Weapons/Hitbox.gd" id="3_l7x7b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_we6w2"]
+radius = 5.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_hhtms"]
+resource_name = "attack"
+length = 1.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-1.5708, 2.96706, 2.96706, -1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SlashSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slash"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SlashSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.05, 0.1, 0.2, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ae26p"]
+_data = {
+"attack": SubResource("Animation_hhtms")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6dcx"]
+radius = 5.98431
+height = 21.9975
+
+[node name="Wooden_hammer" instance=ExtResource("1_eq6xh")]
+
+[node name="Sprite2D" parent="Node2D" index="0"]
+texture = ExtResource("2_rqbwq")
+
+[node name="Hitbox" parent="Node2D/Sprite2D" index="0"]
+script = ExtResource("3_l7x7b")
+damage = 2
+knockback_force = 350
+
+[node name="CollisionShape2D" parent="Node2D/Sprite2D/Hitbox" index="0"]
+position = Vector2(3.53555, -3.53552)
+shape = SubResource("CapsuleShape2D_we6w2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_ae26p")
+}
+
+[node name="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(-2, -7)
+rotation = 1.58581
+shape = SubResource("CapsuleShape2D_v6dcx")

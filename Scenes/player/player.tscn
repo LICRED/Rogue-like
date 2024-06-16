@@ -1,0 +1,266 @@
+[gd_scene load_steps=24 format=3 uid="uid://dp3ipcrnxq8sn"]
+
+[ext_resource type="PackedScene" uid="uid://ctoqbio2nsch0" path="res://Scenes/character.tscn" id="1_ya53e"]
+[ext_resource type="Texture2D" uid="uid://bqmolyqy1d2q" path="res://Assets/Characters/idle_anim/player_idle1.png" id="2_8jl4f"]
+[ext_resource type="Script" path="res://Scenes/player/player.gd" id="2_33uqf"]
+[ext_resource type="Texture2D" uid="uid://dgrslv5wxi034" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim1.png" id="3_5wjkr"]
+[ext_resource type="Texture2D" uid="uid://blbbljvuctwsr" path="res://Assets/Characters/idle_anim/player_idle2.png" id="3_ljs60"]
+[ext_resource type="Texture2D" uid="uid://b8m3e3ju1plpc" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim2.png" id="4_30ahk"]
+[ext_resource type="Texture2D" uid="uid://bakdopruf078q" path="res://Assets/Characters/idle_anim/player_idle3.png" id="4_50y1c"]
+[ext_resource type="Texture2D" uid="uid://donoa7c27bjml" path="res://Assets/Characters/idle_anim/player_idle4.png" id="5_oh52q"]
+[ext_resource type="Texture2D" uid="uid://cu1rksj8nk88j" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim3.png" id="5_ul6lm"]
+[ext_resource type="Texture2D" uid="uid://bhlpbdushl44o" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim4.png" id="6_o2efp"]
+[ext_resource type="Texture2D" uid="uid://bn8iqmd71wmut" path="res://Assets/Characters/run_anim/player_run1.png" id="6_siyay"]
+[ext_resource type="Texture2D" uid="uid://c21lvd6v1j726" path="res://Assets/Characters/run_anim/player_run2.png" id="7_x1r8n"]
+[ext_resource type="Texture2D" uid="uid://d2ohedfpeydie" path="res://Assets/Characters/run_anim/player_run3.png" id="8_3sq0x"]
+[ext_resource type="Texture2D" uid="uid://bt233e24qrrw5" path="res://Assets/Characters/run_anim/player_run4.png" id="9_dkhcu"]
+[ext_resource type="Script" path="res://Scenes/player/FiniteStateMachine.gd" id="11_u0qxb"]
+[ext_resource type="PackedScene" uid="uid://cunsoo212n366" path="res://Scenes/Weapons/sword.tscn" id="16_4xuka"]
+
+[sub_resource type="Animation" id="Animation_6c7qh"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"idle", &"dead"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"switch_camera"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_d51m5"]
+resource_name = "hurt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_7fldn"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_maepa"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"move"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjywf"]
+_data = {
+"dead": SubResource("Animation_6c7qh"),
+"hurt": SubResource("Animation_d51m5"),
+"idle": SubResource("Animation_7fldn"),
+"move": SubResource("Animation_maepa")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdhqr"]
+size = Vector2(12, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uv3t7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5wjkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_30ahk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ul6lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_o2efp")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8jl4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ljs60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_50y1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_oh52q")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_siyay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_x1r8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3sq0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dkhcu")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Player" instance=ExtResource("1_ya53e")]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("2_33uqf")
+max_hp = 4
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_bjywf")
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_xdhqr")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_uv3t7")
+animation = &"idle"
+
+[node name="FiniteStateMachine" parent="." index="3"]
+script = ExtResource("11_u0qxb")
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+
+[node name="Weapons" type="Node2D" parent="." index="5"]
+
+[node name="Sword" parent="Weapons" index="0" instance=ExtResource("16_4xuka")]
+visible = false

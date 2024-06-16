@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://6quthr1738jc"]
+
+[ext_resource type="PackedScene" uid="uid://tuixea20ahxf" path="res://Scenes/Rooms/room.tscn" id="1_if52h"]
+[ext_resource type="PackedScene" uid="uid://daapxbxpodh7y" path="res://Scenes/Rooms/door.tscn" id="2_swhpw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sc3q5"]
+size = Vector2(33, 15)
+
+[node name="Room" instance=ExtResource("1_if52h")]
+
+[node name="TileMap" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(0, 262147, 0, 65536, 262147, 1, 131072, 262147, 1, 196608, 262147, 1, 262144, 262147, 1, 327680, 262147, 1, 393216, 262147, 1, 458752, 262147, 1, 524288, 262147, 1, 1, 131075, 3, 65537, 393219, 1, 131073, 3, 3, 196609, 3, 3, 262145, 3, 3, 327681, 3, 3, 393217, 3, 3, 458753, 3, 3, 524289, 3, 3, 2, 327683, 3, 65538, 458755, 0, 131074, 3, 131075, 196610, 524291, 3, 262146, 3, 3, 327682, 3, 3, 393218, 3, 3, 458754, 3, 3, 524290, 3, 3, 3, 3, 131075, 65539, 3, 131075, 131075, 3, 3, 196611, 3, 3, 262147, 3, 3, 327683, 3, 3, 393219, 3, 3, 458755, 3, 3, 524291, 3, 3, 4, 3, 131075, 65540, 3, 131075, 131076, 3, 3, 196612, 3, 3, 262148, 3, 3, 327684, 3, 3, 393220, 3, 3, 458756, 3, 3, 524292, 3, 3, 5, 65539, 3, 65541, 524291, 1, 131077, 3, 3, 196613, 3, 3, 262149, 3, 3, 327685, 3, 3, 393221, 3, 3, 458757, 3, 131075, 524293, 524291, 3, 6, 131075, 3, 65542, 458755, 0, 131078, 3, 3, 196614, 3, 3, 262150, 3, 3, 327686, 3, 3, 393222, 3, 3, 458758, 3, 3, 524294, 3, 3, 7, 196611, 0, 65543, 196611, 1, 131079, 196611, 1, 196615, 196611, 1, 262151, 196611, 1, 327687, 196611, 1, 393223, 196611, 1, 458759, 196611, 1, 524295, 196611, 1, 589824, 262147, 2, 589825, 3, 131075, 589826, 3, 131075, 589827, 3, 131075, 589828, 3, 131075, 589829, 3, 131075, 589830, 3, 131075, 589831, 196611, 2)
+
+[node name="FurnitureTileMap" parent="." index="1"]
+layer_0/tile_data = PackedInt32Array(196610, 3, 1, 524293, 3, 1)
+
+[node name="TileMap2" parent="." index="2"]
+layer_0/tile_data = PackedInt32Array(589825, 131075, 2, 589826, 327683, 2, 589829, 65539, 2, 589830, 131075, 2)
+
+[node name="Marker2D" type="Marker2D" parent="Entrance" index="0"]
+position = Vector2(76, 77)
+
+[node name="Marker2D2" type="Marker2D" parent="Entrance" index="1"]
+position = Vector2(92, 77)
+
+[node name="Door" parent="Doors" index="0" instance=ExtResource("2_swhpw")]
+position = Vector2(85, -58)
+
+[node name="Marker2D" type="Marker2D" parent="EnemyPos" index="0"]
+position = Vector2(67, 47)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemyPos" index="1"]
+position = Vector2(113, -16)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyPos" index="2"]
+position = Vector2(84, -31)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(84.5, 72.5)
+shape = SubResource("RectangleShape2D_sc3q5")

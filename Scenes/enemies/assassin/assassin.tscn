@@ -1,0 +1,266 @@
+[gd_scene load_steps=23 format=3 uid="uid://cjy4okrbkktjt"]
+
+[ext_resource type="PackedScene" uid="uid://c1s1ev35gvhov" path="res://Scenes/enemies/enemy.tscn" id="1_k5g0d"]
+[ext_resource type="Script" path="res://Scenes/enemies/assassin/assassin.gd" id="2_6opsm"]
+[ext_resource type="Texture2D" uid="uid://dgrslv5wxi034" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim1.png" id="3_yatja"]
+[ext_resource type="Texture2D" uid="uid://b8m3e3ju1plpc" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim2.png" id="4_p48c4"]
+[ext_resource type="Texture2D" uid="uid://cu1rksj8nk88j" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim3.png" id="5_5jlni"]
+[ext_resource type="Texture2D" uid="uid://bhlpbdushl44o" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim4.png" id="6_up7in"]
+[ext_resource type="Texture2D" uid="uid://2khndaqwyjqt" path="res://Assets/enemies/assassin/idle_anim/assassin_idle_anim1.png" id="7_fjmdb"]
+[ext_resource type="Texture2D" uid="uid://dv2oaglj6w8j2" path="res://Assets/enemies/assassin/idle_anim/assassin_idle_anim2.png" id="8_ditg4"]
+[ext_resource type="Texture2D" uid="uid://c65f4bodhhgak" path="res://Assets/enemies/assassin/idle_anim/assassin_idle_anim3.png" id="9_61x3a"]
+[ext_resource type="Texture2D" uid="uid://d8jw8r04rgyc" path="res://Assets/enemies/assassin/idle_anim/assassin_idle_anim4.png" id="10_nu1cj"]
+[ext_resource type="Texture2D" uid="uid://cvagd54tqew4k" path="res://Assets/enemies/assassin/run_anim/assassin_run_anim1.png" id="11_846ld"]
+[ext_resource type="Texture2D" uid="uid://c35fjhurnr8b4" path="res://Assets/enemies/assassin/run_anim/assassin_run_anim2.png" id="12_kh6wx"]
+[ext_resource type="Texture2D" uid="uid://r34vm4cme885" path="res://Assets/enemies/assassin/run_anim/assassin_run_anim3.png" id="13_mthyf"]
+[ext_resource type="Texture2D" uid="uid://dsrwiussxyjnc" path="res://Assets/enemies/assassin/run_anim/assassin_run_anim4.png" id="14_8ijmo"]
+[ext_resource type="Script" path="res://Scenes/enemies/assassin/AssassinFSM.gd" id="15_1kju1"]
+
+[sub_resource type="Animation" id="Animation_73tlh"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"idle", &"dead"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2nklq"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_4ytn2"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_y3anm"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jydw4"]
+_data = {
+"dead": SubResource("Animation_73tlh"),
+"hurt": SubResource("Animation_2nklq"),
+"idle": SubResource("Animation_4ytn2"),
+"run": SubResource("Animation_y3anm")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08lbn"]
+radius = 4.0
+height = 12.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4un0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yatja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p48c4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5jlni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_up7in")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fjmdb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ditg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_61x3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nu1cj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_846ld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_kh6wx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_mthyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8ijmo")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Assassin" instance=ExtResource("1_k5g0d")]
+script = ExtResource("2_6opsm")
+projectile_speed = 150
+accerelation = 30
+max_speed = 70
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_jydw4")
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_08lbn")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_4un0w")
+animation = &"idle"
+
+[node name="FiniteStateMachine" parent="." index="3"]
+script = ExtResource("15_1kju1")
+
+[node name="PathTimer" parent="." index="4"]
+wait_time = 0.23
+
+[node name="CooldownTimer" type="Timer" parent="." index="6"]
+wait_time = 2.0
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="7"]
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

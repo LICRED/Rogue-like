@@ -1,0 +1,241 @@
+[gd_scene load_steps=20 format=3 uid="uid://cdebwim0lonpu"]
+
+[ext_resource type="PackedScene" uid="uid://c1s1ev35gvhov" path="res://Scenes/enemies/enemy.tscn" id="1_2yj0g"]
+[ext_resource type="Texture2D" uid="uid://bux73blbve0a6" path="res://Assets/enemies/bat(maybe)/run_anim/bat_fly_anim1.png" id="2_458yv"]
+[ext_resource type="Script" path="res://Scenes/enemies/bat/bat.gd" id="2_j1yki"]
+[ext_resource type="Texture2D" uid="uid://dgrslv5wxi034" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim1.png" id="2_u1afy"]
+[ext_resource type="Texture2D" uid="uid://b8m3e3ju1plpc" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim2.png" id="3_5612x"]
+[ext_resource type="Texture2D" uid="uid://ccsgvh56ovr0l" path="res://Assets/enemies/bat(maybe)/run_anim/bat_fly_anim2.png" id="3_eh7j3"]
+[ext_resource type="Texture2D" uid="uid://ua0hakjrd52j" path="res://Assets/enemies/bat(maybe)/run_anim/bat_fly_anim3.png" id="4_f0mai"]
+[ext_resource type="Texture2D" uid="uid://cu1rksj8nk88j" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim3.png" id="4_m8x4j"]
+[ext_resource type="Texture2D" uid="uid://38r6hjwux7ws" path="res://Assets/enemies/bat(maybe)/run_anim/bat_fly_anim4.png" id="5_p7v5i"]
+[ext_resource type="Texture2D" uid="uid://bhlpbdushl44o" path="res://Assets/Effect/afterdeath_anim/enemy_afterdead_anim4.png" id="5_t5wln"]
+[ext_resource type="Script" path="res://Scenes/enemies/bat/BatSFM.gd" id="6_kr145"]
+[ext_resource type="Script" path="res://Scenes/Character/Hitbox.gd" id="12_sxph3"]
+
+[sub_resource type="Animation" id="Animation_i56bc"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"fly", &"dead"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4sann"]
+resource_name = "fly"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_8dfc5"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ja5pr"]
+_data = {
+"dead": SubResource("Animation_i56bc"),
+"fly": SubResource("Animation_4sann"),
+"hurt": SubResource("Animation_8dfc5")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ml7kk"]
+radius = 3.04138
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejbf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u1afy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5612x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m8x4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t5wln")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_458yv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eh7j3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f0mai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_p7v5i")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tv0hu"]
+radius = 4.0
+
+[node name="bat" instance=ExtResource("1_2yj0g")]
+script = ExtResource("2_j1yki")
+accerelation = 20
+max_speed = 50
+fly = true
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_ja5pr")
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_ml7kk")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_ejbf3")
+animation = &"fly"
+frame = 3
+
+[node name="FiniteStateMachine" parent="." index="3"]
+script = ExtResource("6_kr145")
+
+[node name="Hitbox" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_sxph3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_tv0hu")
+disabled = true

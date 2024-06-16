@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3nfcxccgun8e"]
+
+[ext_resource type="Texture2D" uid="uid://co3uh7qv6po8s" path="res://Assets/items/weapons/weapon_wooden_hammer.png" id="1_wjmql"]
+[ext_resource type="Script" path="res://Scenes/InventoryItem.gd" id="2_bpctx"]
+
+[node name="InventoryItem" type="TextureRect"]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_wjmql")
+stretch_mode = 5
+script = ExtResource("2_bpctx")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.462745, 0.427451, 0.447059, 1)
+border_width = 2.0
+editor_only = false

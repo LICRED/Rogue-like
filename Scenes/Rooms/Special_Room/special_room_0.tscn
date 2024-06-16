@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbrhv7pn54okq"]
+
+[ext_resource type="PackedScene" uid="uid://tuixea20ahxf" path="res://Scenes/Rooms/room.tscn" id="1_af1bn"]
+[ext_resource type="PackedScene" uid="uid://daapxbxpodh7y" path="res://Scenes/Rooms/door.tscn" id="2_lekew"]
+[ext_resource type="PackedScene" uid="uid://ga0yvcpb35gs" path="res://Scenes/Rooms/Weapon_Room/weapon_room_0.tscn" id="3_3q0oc"]
+[ext_resource type="PackedScene" uid="uid://6quthr1738jc" path="res://Scenes/Rooms/Room/room_4.tscn" id="4_a81xs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6tnc"]
+size = Vector2(96, 36)
+
+[node name="Room" instance=ExtResource("1_af1bn")]
+
+[node name="TileMap" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(196611, 3, 3, 131075, 3, 3, 196612, 3, 3, 131076, 3, 3, 131077, 3, 3, 196613, 3, 3, 196614, 3, 3, 196615, 3, 3, 196616, 3, 3, 196617, 3, 3, 196625, 3, 3, 131089, 3, 3, 131078, 3, 3, 131079, 3, 3, 131080, 3, 3, 131081, 3, 3, 131082, 3, 3, 196618, 3, 3, 131083, 3, 3, 196619, 3, 3, 131084, 3, 3, 196620, 3, 3, 131085, 3, 3, 196621, 3, 3, 131086, 3, 3, 196622, 3, 3, 131087, 3, 3, 196623, 3, 3, 131088, 3, 3, 196624, 3, 3, 917507, 3, 3, 917508, 3, 3, 65539, 393219, 0, 65542, 393219, 0, 65543, 393219, 0, 65546, 393219, 0, 65547, 393219, 0, 65548, 393219, 0, 65549, 393219, 1, 65550, 393219, 0, 65551, 393219, 0, 65552, 393219, 0, 65553, 393219, 0, 65538, 262147, 1, 131074, 262147, 1, 196610, 262147, 1, 65554, 196611, 1, 131090, 196611, 1, 196626, 196611, 1, 17, 131075, 3, 16, 131075, 3, 15, 131075, 3, 14, 131075, 3, 13, 131075, 3, 12, 131075, 3, 11, 131075, 3, 6, 131075, 3, 5, 131075, 3, 4, 131075, 3, 3, 131075, 3, 2, 262147, 0, 18, 196611, 0, 7, 327683, 3, 10, 65539, 3, 1048579, 3, 3, 1048580, 3, 3, 1048581, 3, 3, 1048582, 3, 3, 1048583, 3, 3, 1048584, 3, 3, 1048585, 3, 3, 1048586, 3, 3, 1048587, 3, 3, 1048588, 3, 3, 1048589, 3, 3, 1114115, 3, 3, 1114116, 3, 3, 1114117, 3, 3, 1114118, 3, 3, 1114119, 3, 3, 1114120, 3, 3, 1114121, 3, 3, 1114122, 3, 3, 1114123, 3, 3, 1114124, 3, 3, 1114125, 3, 3, 8, 3, 3, 65544, 3, 3, 65545, 3, 3, 9, 3, 3, 983052, 3, 3, 983053, 3, 3, 983043, 3, 3, 983044, 3, 3, 917509, 65539, 3, 983045, 393219, 0, 983054, 196611, 1, 1048590, 196611, 1, 1114126, 196611, 2, 917506, 262147, 1, 983042, 262147, 1, 1048578, 262147, 1, 1114114, 262147, 2, 983051, 393219, 0, 983050, 393219, 0, 983049, 393219, 0, 983048, 393219, 0, 983047, 393219, 0, 983046, 393219, 0, 65540, 524291, 1, 65541, 524291, 1, 917514, 131075, 3, 917513, 131075, 3, 917512, 131075, 3, 917511, 131075, 3, 917510, 131075, 3)
+
+[node name="TileMap2" parent="." index="2"]
+layer_0/tile_data = PackedInt32Array(1114125, 131075, 2, 1114124, 131075, 2, 1114123, 131075, 2, 1114115, 131075, 2, 1114116, 131075, 2, 1114117, 131075, 2, 1114118, 131075, 2, 1114122, 65539, 2, 1114119, 327683, 2, 196614, 131075, 2, 196615, 131075, 2, 196616, 131075, 2, 196617, 131075, 2, 196618, 131075, 2, 196619, 131075, 2, 196620, 131075, 2, 196621, 131075, 2, 196622, 131075, 2, 196613, 65539, 2, 196623, 327683, 2)
+
+[node name="Marker2D" type="Marker2D" parent="Entrance" index="0"]
+position = Vector2(156, 205)
+
+[node name="Marker2D2" type="Marker2D" parent="Entrance" index="1"]
+position = Vector2(172, 205)
+
+[node name="Door" parent="Doors" index="0" instance=ExtResource("2_lekew")]
+position = Vector2(165, -58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(165, -33)
+shape = SubResource("RectangleShape2D_l6tnc")
+
+[node name="Weapon_Room" parent="." index="8" instance=ExtResource("3_3q0oc")]
+position = Vector2(128, 64)
+
+[node name="Room" parent="." index="9" instance=ExtResource("4_a81xs")]
+position = Vector2(0, 64)

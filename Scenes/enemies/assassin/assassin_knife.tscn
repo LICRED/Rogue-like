@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://drfbgwdvis2vh"]
+
+[ext_resource type="Script" path="res://Scenes/enemies/assassin/assassin_knife.gd" id="1_aca4e"]
+[ext_resource type="Texture2D" uid="uid://o5ogghxgxe0k" path="res://Assets/enemies/assassin/assassin_knife.png" id="2_2k030"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h27rr"]
+radius = 1.41402
+height = 9.9217
+
+[node name="Assassin_knife" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_aca4e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.768727
+shape = SubResource("CapsuleShape2D_h27rr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2k030")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

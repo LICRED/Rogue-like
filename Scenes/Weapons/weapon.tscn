@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://81sfpnst5y6b"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.gd" id="1_tg148"]
+[ext_resource type="Script" path="res://Scenes/Weapons/WeaponHitbox.gd" id="2_myud3"]
+[ext_resource type="Script" path="res://Scenes/Weapons/UI.gd" id="3_1e10v"]
+[ext_resource type="Texture2D" uid="uid://dypbkskj58hm2" path="res://Assets/UI/strong_attack.png" id="3_hkmqb"]
+[ext_resource type="Texture2D" uid="uid://c5bfqxquffmx3" path="res://Assets/UI/strong_attack_white_effect.png" id="4_66dap"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_tg148")
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = -1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(7, -3)
+rotation = -0.785398
+
+[node name="Hitbox" type="Area2D" parent="Node2D/Sprite2D"]
+position = Vector2(-2.82845, 2.82844)
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("2_myud3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Sprite2D/Hitbox"]
+position = Vector2(5.65687, -5.65683)
+rotation = 0.785398
+disabled = true
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_1e10v")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 48.0
+scale = Vector2(2, 2)
+fill_mode = 2
+texture_under = ExtResource("3_hkmqb")
+texture_progress = ExtResource("4_66dap")
+tint_progress = Color(0.301961, 0.301961, 0.301961, 0.494118)
+
+[connection signal="area_entered" from="Node2D/Sprite2D/Hitbox" to="Node2D/Sprite2D/Hitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

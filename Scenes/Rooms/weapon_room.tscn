@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5e34poohhcps"]
+
+[ext_resource type="PackedScene" uid="uid://tuixea20ahxf" path="res://Scenes/Rooms/room.tscn" id="1_vlch4"]
+[ext_resource type="Script" path="res://Scenes/Rooms/weapon_room.gd" id="2_th3il"]
+
+[node name="Weapon_Room" instance=ExtResource("1_vlch4")]
+script = ExtResource("2_th3il")
+
+[node name="WeaponPos" type="Marker2D" parent="." index="8"]

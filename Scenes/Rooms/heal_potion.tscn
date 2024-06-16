@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dausnyvjek6hq"]
+
+[ext_resource type="Texture2D" uid="uid://dxh36a8w3epq7" path="res://Assets/items/red_potion.png" id="1_4rh0v"]
+[ext_resource type="Script" path="res://Scenes/Rooms/heal_potion.gd" id="1_jq74l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6goa"]
+radius = 7.0
+
+[node name="HealPotion" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jq74l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, 0)
+texture = ExtResource("1_4rh0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b6goa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
